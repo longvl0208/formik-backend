@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const authRoute = require('./routes/auth');
 const morganMiddleware = require('./middelware/logger');
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
@@ -23,6 +24,8 @@ app.use(
 );
 app.use(morganMiddleware);
 app.get('/health', (req, res) => res.send({ message: 'ok' }));
+
+app.use(authRoute);
 
 const server = app.listen(port, () => {
   console.log(`THM App running on port ${port}.`);

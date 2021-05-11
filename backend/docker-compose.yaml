@@ -21,9 +21,13 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: thminsight
       POSTGRES_PASSWORD: coding_test_password
+      POSTGRES_USER: thminsight
       POSTGRES_DB: thm_database
     volumes:
       - ./sql/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
       - ./sql/insert.sql:/docker-entrypoint-initdb.d/2-insert.sql
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
