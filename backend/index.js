@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const authRoute = require('./routes/auth');
+const uploadRoute = require('./routes/upload');
 const morganMiddleware = require('./middelware/logger');
 
 require('dotenv').config({ path: path.join(__dirname, '.env') });
@@ -44,6 +45,7 @@ app.use(morganMiddleware);
 app.get('/health', (req, res) => res.send({ message: 'ok' }));
 
 app.use(authRoute);
+app.use(uploadRoute);
 
 const server = app.listen(port, () => {
   console.log(`THM App running on port ${port}.`);
